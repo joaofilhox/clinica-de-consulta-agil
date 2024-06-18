@@ -111,3 +111,35 @@ function cancelarConsulta() {
         mostrarMenu();
     });
 }
+
+function mostrarMenu() {
+    console.log('\nMenu:');
+    console.log('1. Cadastrar um paciente');
+    console.log('2. Marcar consulta');
+    console.log('3. Cancelar consulta');
+    console.log('4. Sair');
+
+    rl.question('Escolha uma opção: ', (opcao) => {
+        switch (opcao) {
+            case '1':
+                cadastrarPaciente();
+                break;
+            case '2':
+                marcarConsulta();
+                break;
+            case '3':
+                cancelarConsulta();
+                break;
+            case '4':
+                salvarDados();
+                rl.close();
+                break;
+            default:
+                console.log('Opção inválida, tente novamente.');
+                mostrarMenu();
+        }
+    });
+}
+
+carregarDados();
+mostrarMenu();
