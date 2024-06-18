@@ -23,3 +23,8 @@ function carregarDados() {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data), 'utf8');
   }
   
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
