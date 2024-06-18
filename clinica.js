@@ -18,3 +18,8 @@ function carregarDados() {
     }
   }
   
+  function salvarDados() {
+    const data = { pacientes, consultas };
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data), 'utf8');
+  }
+  
