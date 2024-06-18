@@ -73,8 +73,13 @@ function marcarConsulta() {
         rl.question('Digite o dia da consulta (formato DD-MM-YYYY): ', (dia) => {
             rl.question('Digite a hora da consulta (formato HH:MM): ', (hora) => {
                 rl.question('Digite a especialidade da consulta: ', (especialidade) => {
-                    const dataConsulta = new Date(`${dia}T${hora}:00`);
-                    if (dataConsulta < new Date()) {
+                    const dataConsultaStr = `${dia} ${hora}`;
+                    const [day, month, year] = dia.split('-');
+                    const [hour, minute] = hora.split(':');
+                    const dataConsulta = new Date(year, month - 1, day, hour, minute);
+                    const agora = new Date();
+
+                    if (dataConsulta < agora) {
                         console.log('Não é possível marcar consultas retroativas.');
                         return mostrarMenu();
                     }
