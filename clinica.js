@@ -19,8 +19,13 @@ function carregarDados() {
 }
 
 function salvarDados() {
-    const data = { pacientes, consultas };
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data), 'utf8');
+    try {
+        const data = { pacientes, consultas };
+        fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf8');
+        console.log('Dados salvos com sucesso.');
+    } catch (err) {
+        console.error('Erro ao salvar dados:', err);
+    }
 }
 
 const rl = readline.createInterface({
@@ -36,6 +41,7 @@ function cadastrarPaciente() {
             } else {
                 pacientes.push({ nome, telefone });
                 console.log('Paciente cadastrado com sucesso');
+                salvarDados();
             }
             mostrarMenu();
         });
@@ -80,6 +86,7 @@ function marcarConsulta() {
 
                     consultas.push({ paciente, dia, hora, especialidade });
                     console.log('Consulta marcada com sucesso');
+                    salvarDados();
                     mostrarMenu();
                 });
             });
@@ -108,6 +115,7 @@ function cancelarConsulta() {
 
         const consulta = consultas.splice(consultaIdx, 1);
         console.log(`Consulta de ${consulta[0].paciente.nome} em ${consulta[0].dia} ${consulta[0].hora} cancelada com sucesso`);
+        salvarDados();
         mostrarMenu();
     });
 }
