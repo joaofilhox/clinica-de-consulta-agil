@@ -28,3 +28,17 @@ function carregarDados() {
     output: process.stdout
   });
   
+  function cadastrarPaciente() {
+    rl.question('Digite o nome do paciente: ', (nome) => {
+      rl.question('Digite o telefone do paciente: ', (telefone) => {
+        if (pacientes.find(paciente => paciente.telefone === telefone)) {
+          console.log('Paciente já cadastrado!');
+        } else {
+          pacientes.push({ nome, telefone });
+          console.log('Paciente cadastrado com sucesso');
+        }
+        mostrarMenu();
+      });
+    });
+  }
+  
