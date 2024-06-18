@@ -42,3 +42,9 @@ function carregarDados() {
     });
   }
   
+  function listarPacientes() {
+    pacientes.forEach((paciente, idx) => {
+      console.log(`${idx + 1}. ${paciente.nome} - ${paciente.telefone}`);
+    });
+  }
+  
