@@ -86,3 +86,28 @@ function marcarConsulta() {
         });
     });
 }
+
+function cancelarConsulta() {
+    if (consultas.length === 0) {
+        console.log('Nenhuma consulta agendada.');
+        return mostrarMenu();
+    }
+
+    consultas.forEach((consulta, idx) => {
+        const paciente = consulta.paciente;
+        console.log(`${idx + 1}. ${consulta.dia} ${consulta.hora} - ${consulta.especialidade} para ${paciente.nome}`);
+    });
+
+    rl.question('Escolha o número da consulta para cancelar: ', (consultaIdx) => {
+        consultaIdx = parseInt(consultaIdx) - 1;
+
+        if (consultaIdx < 0 || consultaIdx >= consultas.length) {
+            console.log('Consulta inválida.');
+            return mostrarMenu();
+        }
+
+        const consulta = consultas.splice(consultaIdx, 1);
+        console.log(`Consulta de ${consulta[0].paciente.nome} em ${consulta[0].dia} ${consulta[0].hora} cancelada com sucesso`);
+        mostrarMenu();
+    });
+}
